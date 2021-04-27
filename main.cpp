@@ -5,16 +5,20 @@
 #include <map>
 #include <stack>
 #include <sstream>
-#include "src/stringsOperations.h"
+#include "include/stringOperations/stringsOperations.h"
+#include "src/operations.h"
+
 using namespace std;
 
-
-
-int main(){
+int main() {
     string input = "";
     getline(cin, input);
-    cout << normalize(input);
-
+    input = normalize(input);
+    auto temp = breakUp(input);
+    for (auto item : temp) {
+        cout << "|" << item;
+    }
+    cout << "|";
 
     return 0;
 }

@@ -4,4 +4,4 @@ project(stringOperations)
 
 set(STRING_SOURCE stringsOperations.h stringsOperations.cpp)
 
-add_library( stringsOperations STATIC ${STRING_SOURCE} )
+add_library(stringsOperations STATIC ${STRING_SOURCE})
