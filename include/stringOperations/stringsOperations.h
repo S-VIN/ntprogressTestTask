@@ -2,10 +2,10 @@
 
 using namespace std;
 
-float stringToFloat(string input){
+double stringTodouble(string input){
     return atof(input.c_str());
 }
 
-string floatToString(float input){
+string doubleToString(double input){
     return to_string(input);
 }

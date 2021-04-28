@@ -3,8 +3,6 @@ project(ntprogressTestTask)
 
 set(CMAKE_CXX_STANDARD 20)
 
-#enable_testing()
-
 set(SRC_LIST main.cpp src/operations.h src/math.h)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})

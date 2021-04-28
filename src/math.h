@@ -3,7 +3,7 @@
 
 class Solver{
 public:
-    static float solveSimple(float first, float second, char operation){
+    static double solveSimple(double first, double second, char operation){
         switch (operation) {
             case '+':
                 return plus(first, second);
@@ -18,19 +18,19 @@ public:
     }
 
 private:
-    static float plus(float first, float second){
+    static double plus(double first, double second){
         return first + second;
     }
 
-    static float minus(float first, float second){
+    static double minus(double first, double second){
         return first - second;
     }
 
-    static float multiply(float first, float second){
+    static double multiply(double first, double second){
         return first * second;
     }
 
-    static float divide(float first, float second){
+    static double divide(double first, double second){
         return first / second;
     }
 };
