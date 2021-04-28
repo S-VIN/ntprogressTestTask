@@ -1,9 +1,9 @@
 #include <string>
 #include <exception>
 
-class solver{
+class Solver{
 public:
-    static int solveSimple(int first, int second, char operation){
+    static float solveSimple(float first, float second, char operation){
         switch (operation) {
             case '+':
                 return plus(first, second);
@@ -14,27 +14,23 @@ public:
             case '*':
                 return multiply(first, second);
         }
-        throw logic_error("wrong operation");
+        throw std::logic_error("wrong operation");
     }
 
 private:
-    template <typename T>
-    static T plus(T first, T second){
+    static float plus(float first, float second){
         return first + second;
     }
 
-    template <typename T>
-    static T minus(T first, T second){
+    static float minus(float first, float second){
         return first - second;
     }
 
-    template <typename T>
-    static T multiply(T first, T second){
+    static float multiply(float first, float second){
         return first * second;
     }
 
-    template <typename T>
-    static T divide(T first, T second){
+    static float divide(float first, float second){
         return first / second;
     }
 };

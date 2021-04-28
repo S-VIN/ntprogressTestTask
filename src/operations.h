@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <stack>
 #include <iostream>
 #include <exception>
 #include <vector>
@@ -66,27 +67,43 @@ vector<string> breakUp(string input) {
     return result;
 }
 
-
-
-int solveExpressionWithoutBrackets(vector<string> input){
+string solveExpressionWithoutBrackets(vector<string> input){
     //solve * / expression first
     int size = input.size();
-    for(int i = 1; i < size; i++){
+    for(int i = 0; i < size; i++){
         if(input[i] == "/" || input[i] == "*"){
-            input[i - 1] = solver::solveSimple(stringToInt(input[i - 1]), stringToInt(input[i + 1]) , input[i][0]);
+            input[i - 1] = floatToString(Solver::solveSimple(stringToFloat(input[i - 1]), stringToFloat(input[i + 1]) , input[i][0]));
             input.erase(input.begin() + i);
             input.erase(input.begin() + i);
+            i = 0;
             size = input.size();
         }
     }
     //solve + -
-    for(int i = 1; i < size; i++){
+    for(int i = 0; i < size; i++){
         if(input[i] == "+" || input[i] == "-"){
-            input[i - 1] = solver::solveSimple(stringToInt(input[i - 1]), stringToInt(input[i + 1]) , input[i][0]);
+            input[i - 1] = floatToString(Solver::solveSimple(stringToFloat(input[i - 1]), stringToFloat(input[i + 1]) , input[i][0]));
             input.erase(input.begin() + i);
             input.erase(input.begin() + i);
+            i = 0;
             size = input.size();
         }
     }
-    return stringToInt(input[0]);
+    return input[0];
+}
+
+string solveExpression(vector<string> input){
+    for(int i = 0; i < input.size(); i++){
+        if(input[i] == ")"){
+            vector<string> temp;
+            while(input[i] != "("){
+                temp.push_back(input[i]);
+                i--;
+                input.erase(input.begin() + i);
+            }
+            input[i] = solveExpressionWithoutBrackets(temp);
+            i = 0;
+        }
+    }
+    return input[0];
 }

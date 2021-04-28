@@ -14,11 +14,7 @@ int main() {
     string input = "";
     getline(cin, input);
     input = normalize(input);
-    auto temp = breakUp(input);
-    for (auto item : temp) {
-        cout << "|" << item;
-    }
-    cout << "|";
+    solveExpressionWithoutBrackets(breakUp(input));
 
     return 0;
 }
