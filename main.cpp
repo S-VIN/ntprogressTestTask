@@ -19,7 +19,7 @@ int main() {
     stringstream ss;
     ss.setf(std::ios::fixed);
     ss.precision(2);
-    ss << stringTodouble(solveExpression(breakUp(input)));
+    ss << stringToDouble(solveExpression(breakUp(input)));
 
     string result = ss.str();
     for(int i = 0; i < 3; i++)

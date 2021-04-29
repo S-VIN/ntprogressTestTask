@@ -10,7 +10,7 @@ TEST_CASE("check func", "[c]"){
 }
 
 TEST_CASE("normalise func", "[nf]") {
-    CHECK(normalize(" 1 2 3 45 ") == "12345");
+    CHECK(normalize(" 1 2   3 45 ") == "12345");
     CHECK(normalize(" ") == "");
     CHECK(normalize(",123,12,3") == ".123.12.3");
 }
@@ -55,5 +55,9 @@ TEST_CASE("solveExpression func", "[sef]"){
     CHECK(solveExpression(breakUp("1+((1+1))+1")) == "4.000000");
     CHECK(solveExpression(breakUp("((1+2)+1)")) == "4.000000");
     CHECK(solveExpression(breakUp("(1+(1+2))")) == "4.000000");
+    CHECK(solveExpression(breakUp("-10+(8*2.5)-(3/1.5)")) == "8.000000");
+    CHECK(solveExpression(breakUp("-1+5-3")) == "1.000000");
+    CHECK(solveExpression(breakUp("1+(2*(2.5+2.5+(3-2)))-(3/1.5)")) == "11.000000");
+    CHECK(solveExpression(breakUp("-(2+3)")) == "-5.000000");
 }
 

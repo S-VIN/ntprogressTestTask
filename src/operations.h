@@ -50,16 +50,25 @@ string normalize(string input) {
 }
 
 vector<string> breakUp(string input) {
+    input = normalize(input);
     vector<string> result;
     result.push_back("");
     string operation = "*/+-()";
     for (int i = 0; i < input.size(); i++) {
+        //if input[i] == operation
         if (operation.find_first_of(input[i]) != string::npos) {
-            result.push_back(string(1, input[i]));
-            result.push_back("");
-        } else {
-            result[result.size() - 1] += input[i];
+            if(input[i + 1] == '('){
+                result.push_back(string(1, input[i]));
+                i++;
+                result.push_back(string(1, input[i]));
+                result.push_back("");
+                continue;
+            }
+                result.push_back(string(1, input[i]));
+                result.push_back("");
+                continue;
         }
+        result[result.size() - 1] += input[i];
     }
 
     //clear from zero string
@@ -105,7 +114,7 @@ string solveExpressionWithoutBrackets(vector<string> input){
     int size = input.size();
     for(int i = 0; i < size; i++){
         if(input[i] == "/" || input[i] == "*"){
-            input[i - 1] = doubleToString(Solver::solveSimple(stringTodouble(input[i - 1]), stringTodouble(input[i + 1]) , input[i][0]));
+            input[i - 1] = doubleToString(Solver::solveSimple(stringToDouble(input[i - 1]), stringToDouble(input[i + 1]) , input[i][0]));
             input.erase(input.begin() + i);
             input.erase(input.begin() + i);
             i = 0;
@@ -114,8 +123,11 @@ string solveExpressionWithoutBrackets(vector<string> input){
     }
     //solve + -
     for(int i = 0; i < size; i++){
+        if(i == 0 && input.size() != 1){
+            i++;
+        }
         if(input[i] == "+" || input[i] == "-"){
-            input[i - 1] = doubleToString(Solver::solveSimple(stringTodouble(input[i - 1]), stringTodouble(input[i + 1]) , input[i][0]));
+            input[i - 1] = doubleToString(Solver::solveSimple(stringToDouble(input[i - 1]), stringToDouble(input[i + 1]) , input[i][0]));
             input.erase(input.begin() + i);
             input.erase(input.begin() + i);
             i = 0;
@@ -142,7 +154,12 @@ string solveExpression(vector<string> input){
             reverse(temp.begin(), temp.end());
             input[i] = solveExpressionWithoutBrackets(temp);
             i = 0;
-
+        }
+    }
+    if(input.size() > 1){
+        if(input[0] == "-"){
+            input[1] = addMinus(input[1]);
+            return input[1];
         }
     }
     return solveExpressionWithoutBrackets(input);
