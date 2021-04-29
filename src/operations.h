@@ -139,12 +139,12 @@ string solveExpressionWithoutBrackets(vector<string> input){
 
 string solveExpression(vector<string> input){
     for(int i = 0; i < input.size(); i++){
-
+        //search ) and then cut (expr)
         if(input[i] == ")"){
             input.erase(input.begin() + i);
             i--;
             vector<string> temp;
-
+            //temp vector for expression in brackets
             while(input[i] != "("){
                 temp.push_back(input[i]);
                 input.erase(input.begin() + i);
@@ -156,11 +156,13 @@ string solveExpression(vector<string> input){
             i = 0;
         }
     }
+    //if we have negative element and minus
     if(input.size() > 1){
         if(input[0] == "-"){
             input[1] = addMinus(input[1]);
             return input[1];
         }
     }
+
     return solveExpressionWithoutBrackets(input);
 }
